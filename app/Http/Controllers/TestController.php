@@ -16,7 +16,6 @@ class TestController extends Controller
             [1, 0.7, 0.4, 0.7, 1]
         ];
 
-        // Buat matriks keputusan dengan 20 alternatif dan 10 kriteria
         // $matriksKeputusan = [
         //     [0.5, 1, 0.7, 0.7, 0.8, 0.5, 1, 0.7, 0.7, 0.8],
         //     [0.8, 0.7, 1, 0.5, 1, 0.8, 0.7, 1, 0.5, 1],

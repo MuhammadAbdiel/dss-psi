@@ -59,7 +59,7 @@
 <script src="/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 <script src="/assets/extra-libs/DataTables/datatables.min.js"></script>
 <script>
-  $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
         // ============================================================== 
         // Login and Recover Password 
@@ -75,11 +75,11 @@
         });
 </script>
 <script>
-  $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
 </script>
 <script>
-  //***********************************//
+    //***********************************//
         // For select 2
         //***********************************//
         $(".select2").select2();
@@ -121,7 +121,7 @@
         });
 </script>
 <script>
-  // Basic Example with form
+    // Basic Example with form
         var form = $("#example-form");
         form.validate({
             errorPlacement: function errorPlacement(error, element) {
@@ -151,7 +151,7 @@
         });
 </script>
 <script>
-  $(function () {
+    $(function () {
             // Success Type
             $('#ts-success').on('click', function () {
                 toastr.success('Have fun storming the castle!', 'Miracle Max Says');
@@ -175,7 +175,7 @@
         });
 </script>
 <script>
-  /****************************************
+    /****************************************
          *       Basic Table                   *
          ****************************************/
         $('#zero_config').DataTable();
@@ -187,8 +187,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-{{-- <script>
-  $(function () {
+<script>
+    $(function () {
         
         $('.btn-logout').on('click', function () {
             Swal.fire({
@@ -207,7 +207,7 @@
         });
 
     })
-</script> --}}
+</script>
 </body>
 
 </html>

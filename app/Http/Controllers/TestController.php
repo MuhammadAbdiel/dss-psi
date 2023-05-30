@@ -16,6 +16,8 @@ class TestController extends Controller
             [1, 0.7, 0.4, 0.7, 1]
         ];
 
+        dd($matriksKeputusan);
+
         // $matriksKeputusan = [
         //     [0.5, 1, 0.7, 0.7, 0.8, 0.5, 1, 0.7, 0.7, 0.8],
         //     [0.8, 0.7, 1, 0.5, 1, 0.8, 0.7, 1, 0.5, 1],
@@ -125,7 +127,7 @@ class TestController extends Controller
         // urutkan nilai $sumPsi dari yang terbesar ke terkecil
         arsort($sumPsi);
 
-        dd($sumPsi);
+        // dd($sumPsi);
 
         // foreach ($matriksKeputusan as $key => $value) {
         //     $arrayColumn[$key] = array_column($matriksKeputusan, $key);

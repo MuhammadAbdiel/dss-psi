@@ -95,9 +95,9 @@
   </nav>
 </header>
 
-{{-- <form action="/logout" id="logout-form" method="POST">
+<form action="/logout" id="logout-form" method="POST">
   @csrf
-</form> --}}
+</form>
 <!-- ============================================================== -->
 <!-- End Topbar header -->
 <!-- ============================================================== -->

@@ -45,8 +45,8 @@
             <h3>LOGIN</h3>
           </div>
           <!-- Form -->
-          {{-- <form class="form-horizontal m-t-20" id="loginform" action="/login" method="POST">
-            @csrf --}}
+          <form class="form-horizontal m-t-20" id="loginform" action="/login" method="POST">
+            @csrf
             <div class="row p-b-30">
               <div class="col-12">
                 <div class="input-group mb-3">
@@ -55,7 +55,7 @@
                         class="ti-email"></i></span>
                   </div>
                   <input type="email" name="email" class="form-control form-control-lg" placeholder="Email"
-                    aria-label="Email" aria-describedby="basic-addon1" required {{-- value="{{ old('email') }}" --}}>
+                    aria-label="Email" aria-describedby="basic-addon1" required value="{{ old('email') }}">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -76,8 +76,7 @@
                 </div>
               </div>
             </div>
-            {{--
-          </form> --}}
+          </form>
         </div>
       </div>
     </div>

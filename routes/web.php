@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CriteriaController;
+use App\Http\Controllers\DecisionController;
+use App\Http\Controllers\AlternativeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +22,12 @@ Route::get('/test', [TestController::class, 'index']);
 
 Route::get('/', function () {
   return view('contents.home');
-});
+})->middleware(['auth']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+Route::resource('/alternatives', AlternativeController::class)->middleware('auth');
+Route::resource('/criterias', CriteriaController::class)->middleware('auth');
+Route::resource('/decisions', DecisionController::class)->middleware('auth');

@@ -4,12 +4,12 @@
 <div class="page-breadcrumb">
   <div class="row">
     <div class="col-12 d-flex no-block align-items-center">
-      <h4 class="page-title">Decisions</h4>
+      <h4 class="page-title">Matrices</h4>
       <div class="ml-auto text-right">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Decisions</li>
+            <li class="breadcrumb-item active" aria-current="page">Matrices</li>
           </ol>
         </nav>
       </div>
@@ -22,17 +22,24 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title mb-3">Decision Data</h5>
-          <a href="/decisions/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <h5 class="card-title mb-3">Matrix Data</h5>
+          <a href="/matrices/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <form action="/matrices/truncate" method="POST" class="d-inline-block">
+            @csrf
+            <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i>
+              Delete Data</button>
+          </form>
           <div class="table-responsive mt-3">
-            <table class="table table-striped table-bordered decision-datatable">
+            <table id="zero_config" class="table table-striped table-bordered matrix-datatable">
               <thead>
                 <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                  <th>No.</th>
+                  <th>Alternatif</th>
+
+                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+
+                    @endfor
+
                 </tr>
               </thead>
               <tbody>
@@ -43,6 +50,8 @@
 
                 @foreach ($keys as $key)
                 <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>Alternatif {{ $loop->iteration }}</td>
                   @foreach ($matrix[$key] as $value)
                   <td>{{ $value }}</td>
                   @endforeach
@@ -52,11 +61,12 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                  <th>No.</th>
+                  <th>Alternatif</th>
+
+                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+
+                    @endfor
                 </tr>
               </tfoot>
             </table>
@@ -73,7 +83,7 @@
 {{-- <script>
   $(function () {
 
-    var table = $('.decision-datatable').DataTable({
+    var table = $('.matrix-datatable').DataTable({
         processing: true,
         serverSide: true,
         responsive: true,

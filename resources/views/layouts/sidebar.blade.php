@@ -20,10 +20,10 @@
             href="/criterias" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span
               class="hide-menu">Criterias</span></a>
         </li>
-        <li class="sidebar-item {{ Request::is('/decisions*') ? 'selected' : '' }}"> <a
-            class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/decisions*') ? 'active' : '' }}"
-            href="/decisions" aria-expanded="false"><i class="mdi mdi-counter"></i><span
-              class="hide-menu">Decisions</span></a>
+        <li class="sidebar-item {{ Request::is('/matrices*') ? 'selected' : '' }}"> <a
+            class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/matrices*') ? 'active' : '' }}"
+            href="/matrices" aria-expanded="false"><i class="mdi mdi-counter"></i><span
+              class="hide-menu">Matrices</span></a>
         </li>
       </ul>
     </nav>

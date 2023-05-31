@@ -11,13 +11,13 @@ class Matrix extends Model
 
     protected $guarded = ['id'];
 
-    public function alternatives()
+    public function alternative()
     {
-        return $this->hasMany(Alternative::class, 'alternative_id');
+        return $this->belongsTo(Alternative::class);
     }
 
-    public function criterias()
+    public function criteria()
     {
-        return $this->hasMany(Criteria::class, 'criteria_id');
+        return $this->belongsTo(Criteria::class);
     }
 }

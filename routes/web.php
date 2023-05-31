@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MatrixController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\AlternativeController;
@@ -30,4 +31,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::resource('/alternatives', AlternativeController::class)->middleware('auth');
 Route::resource('/criterias', CriteriaController::class)->middleware('auth');
-Route::resource('/decisions', DecisionController::class)->middleware('auth');
+Route::resource('/matrices', MatrixController::class)->middleware('auth');
+Route::post('/matrices/truncate', [MatrixController::class, 'truncate'])->middleware('auth');
+
+Route::get('/count', [MatrixController::class, 'count'])->middleware('auth');

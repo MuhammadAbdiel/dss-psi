@@ -16,7 +16,7 @@ class TestController extends Controller
             [1, 0.7, 0.4, 0.7, 1]
         ];
 
-        dd($matriksKeputusan);
+        // dd($matriksKeputusan);
 
         // $matriksKeputusan = [
         //     [0.5, 1, 0.7, 0.7, 0.8, 0.5, 1, 0.7, 0.7, 0.8],
@@ -50,6 +50,8 @@ class TestController extends Controller
         for ($i = 0; $i < $jumlahKriteria; $i++) {
             $arrayColumn[$i] = array_column($matriksKeputusan, $i);
         }
+
+        // dd($arrayColumn);
 
         // create max and min each criteria
         $max = [];

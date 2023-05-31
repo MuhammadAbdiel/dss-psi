@@ -80,7 +80,10 @@ class MatrixController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.matrices.create', [
+            'criterias' => Criteria::latest()->get(),
+            'alternatives' => Alternative::latest()->get(),
+        ]);
     }
 
     /**
@@ -91,7 +94,20 @@ class MatrixController extends Controller
      */
     public function store(StoreMatrixRequest $request)
     {
-        //
+        // Check if data already exists
+        $check = Matrix::where('alternative_id', $request->alternative_id)
+            ->where('criteria_id', $request->criteria_id)
+            ->first();
+
+        if ($check) {
+            Alert::error('Error', 'Data already exists!');
+            return redirect('/matrices/create');
+        } else {
+            Matrix::create($request->validated());
+            Alert::success('Success', 'Value matrix has been added.');
+
+            return redirect('/matrices');
+        }
     }
 
     /**
@@ -150,7 +166,8 @@ class MatrixController extends Controller
     {
         $data = Matrix::latest()->get();
 
-        // dd(empty($data));
+        $alternativeCount = Alternative::count();
+        $criteriaCount = Criteria::count();
 
         // create array 2 dimensional and push data from $data
         $matrix = [];
@@ -161,81 +178,103 @@ class MatrixController extends Controller
         $jumlahAlternatif = count($matrix);
         $jumlahKriteria = count($matrix[1]);
 
-        // create max and min each criteria
-        $max = [];
-        $min = [];
-        for ($i = 1; $i <= $jumlahKriteria; $i++) {
-            $max[$i] = max(array_column($matrix, $i));
-            $min[$i] = min(array_column($matrix, $i));
-        }
+        if ($jumlahAlternatif != $alternativeCount || $jumlahKriteria != $criteriaCount) {
+            Alert::error('Error', 'Data yang akan dihitung tidak lengkap! Silahkan lengkapi data terlebih dahulu.');
+            return redirect('/matrices');
+        } else {
+            // create max and min each criteria
+            $max = [];
+            $min = [];
+            for ($i = 1; $i <= $jumlahKriteria; $i++) {
+                $max[$i] = max(array_column($matrix, $i));
+                $min[$i] = min(array_column($matrix, $i));
+            }
 
-        // create normalisasi matrix by dividing each value with max if benefit and min if cost
-        $normalisasi = [];
-        for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-            for ($j = 1; $j <= $jumlahKriteria; $j++) {
-                if (Criteria::find($j)->type == 'benefit') {
-                    $normalisasi[$i][$j] = $matrix[$i][$j] / $max[$j];
-                } else {
-                    $normalisasi[$i][$j] = $min[$j] / $matrix[$i][$j];
+            // create normalisasi matrix by dividing each value with max if benefit and min if cost
+            $normalisasi = [];
+            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                for ($j = 1; $j <= $jumlahKriteria; $j++) {
+                    if (Criteria::find($j)->type == 'benefit') {
+                        $normalisasi[$i][$j] = $matrix[$i][$j] / $max[$j];
+                    } else {
+                        $normalisasi[$i][$j] = $min[$j] / $matrix[$i][$j];
+                    }
                 }
             }
-        }
 
-        // sum each column of normalisasi matrix
-        $sumEachCriteria = [];
-        for ($i = 1; $i <= $jumlahKriteria; $i++) {
-            $sumEachCriteria[$i] = array_sum(array_column($normalisasi, $i));
-        }
-
-        // 1 / jumlah alternatif kemudian dikali dengan $sumEachCriteria
-        $averageValue = array_map(function ($value) use ($jumlahAlternatif) {
-            return (1 / $jumlahAlternatif) * $value;
-        }, $sumEachCriteria);
-
-        // (nilai normalisasi - $averageValue) ^ 2
-        $pow = [];
-        for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-            for ($j = 1; $j <= $jumlahKriteria; $j++) {
-                $pow[$i][$j] = pow($normalisasi[$i][$j] - $averageValue[$j], 2);
+            // sum each column of normalisasi matrix
+            $sumEachCriteria = [];
+            for ($i = 1; $i <= $jumlahKriteria; $i++) {
+                $sumEachCriteria[$i] = array_sum(array_column($normalisasi, $i));
             }
-        }
 
-        // sum each column of pow
-        $sumPow = [];
-        for ($i = 1; $i <= $jumlahKriteria; $i++) {
-            $sumPow[$i] = array_sum(array_column($pow, $i));
-        }
+            // 1 / jumlah alternatif kemudian dikali dengan $sumEachCriteria
+            $averageValue = array_map(function ($value) use ($jumlahAlternatif) {
+                return (1 / $jumlahAlternatif) * $value;
+            }, $sumEachCriteria);
 
-        // 1 - $sumPow
-        $result = array_map(function ($value) {
-            return 1 - $value;
-        }, $sumPow);
-
-        // sum result
-        $sumResult = array_sum($result);
-
-        // Menentukan bobot kriteria dengan cara membagi $result dengan $sumResult
-        $criteriaWeight = array_map(function ($value) use ($sumResult) {
-            return $value / $sumResult;
-        }, $result);
-
-        // Menentukan nilai PSI dengan cara mengalikan nilai normalisasi dengan bobot kriteria
-        $psi = [];
-        for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-            for ($j = 1; $j <= $jumlahKriteria; $j++) {
-                $psi[$i][$j] = $normalisasi[$i][$j] * $criteriaWeight[$j];
+            // (nilai normalisasi - $averageValue) ^ 2
+            $pow = [];
+            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                for ($j = 1; $j <= $jumlahKriteria; $j++) {
+                    $pow[$i][$j] = pow($normalisasi[$i][$j] - $averageValue[$j], 2);
+                }
             }
-        }
 
-        // sum each row of psi
-        $sumPsi = [];
-        for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-            $sumPsi[$i] = array_sum($psi[$i]);
-        }
+            // sum each column of pow
+            $sumPow = [];
+            for ($i = 1; $i <= $jumlahKriteria; $i++) {
+                $sumPow[$i] = array_sum(array_column($pow, $i));
+            }
 
-        // urutkan nilai $sumPsi dari yang terbesar ke terkecil
-        arsort($sumPsi);
+            // 1 - $sumPow
+            $result = array_map(function ($value) {
+                return 1 - $value;
+            }, $sumPow);
+
+            // sum result
+            $sumResult = array_sum($result);
+
+            // Menentukan bobot kriteria dengan cara membagi $result dengan $sumResult
+            $criteriaWeight = array_map(function ($value) use ($sumResult) {
+                return $value / $sumResult;
+            }, $result);
+
+            // Menentukan nilai PSI dengan cara mengalikan nilai normalisasi dengan bobot kriteria
+            $psi = [];
+            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                for ($j = 1; $j <= $jumlahKriteria; $j++) {
+                    $psi[$i][$j] = $normalisasi[$i][$j] * $criteriaWeight[$j];
+                }
+            }
+
+            // sum each row of psi
+            $sumPsi = [];
+            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                $sumPsi[$i] = array_sum($psi[$i]);
+            }
+
+            // urutkan nilai $sumPsi dari yang terbesar ke terkecil
+            arsort($sumPsi);
+        }
 
         dd($matrix, $max, $min, $normalisasi, $sumEachCriteria, $averageValue, $pow, $sumPow, $result, $sumResult, $criteriaWeight, $psi, $sumPsi);
+
+        // return view('contents.calculate.index', [
+        //     'data' => $data,
+        //     'matrix' => $matrix,
+        //     'max' => $max,
+        //     'min' => $min,
+        //     'normalisasi' => $normalisasi,
+        //     'sumEachCriteria' => $sumEachCriteria,
+        //     'averageValue' => $averageValue,
+        //     'pow' => $pow,
+        //     'sumPow' => $sumPow,
+        //     'result' => $result,
+        //     'sumResult' => $sumResult,
+        //     'criteriaWeight' => $criteriaWeight,
+        //     'psi' => $psi,
+        //     'sumPsi' => $sumPsi,
+        // ]);
     }
 }

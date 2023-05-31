@@ -22,7 +22,7 @@ class AlternativeController extends Controller
         if ($request->ajax()) {
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="/alternatives/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                    $actionBtn = '<a href="/alternatives/' . $row->id . '/edit" class="btn btn-warning"><i
                                     class="mdi mdi-pencil"></i>
                                 Edit</a>
                                 <a href="/alternatives/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
@@ -49,7 +49,7 @@ class AlternativeController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.alternatives.create');
     }
 
     /**
@@ -60,7 +60,10 @@ class AlternativeController extends Controller
      */
     public function store(StoreAlternativeRequest $request)
     {
-        //
+        Alternative::create($request->validated());
+        Alert::success('Success', 'Alternative has been added.');
+
+        return redirect('/alternatives');
     }
 
     /**
@@ -82,7 +85,7 @@ class AlternativeController extends Controller
      */
     public function edit(Alternative $alternative)
     {
-        //
+        return view('contents.alternatives.edit', compact('alternative'));
     }
 
     /**
@@ -94,7 +97,10 @@ class AlternativeController extends Controller
      */
     public function update(UpdateAlternativeRequest $request, Alternative $alternative)
     {
-        //
+        $alternative->update($request->validated());
+        Alert::success('Success!', 'Alternative has been updated.');
+
+        return redirect('/alternatives');
     }
 
     /**

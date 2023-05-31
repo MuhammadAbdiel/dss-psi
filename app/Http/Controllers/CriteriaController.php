@@ -22,7 +22,7 @@ class CriteriaController extends Controller
         if ($request->ajax()) {
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="/criterias/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                    $actionBtn = '<a href="/criterias/' . $row->id . '/edit" class="btn btn-warning"><i
                                     class="mdi mdi-pencil"></i>
                                 Edit</a>
                                 <a href="/criterias/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
@@ -49,7 +49,7 @@ class CriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.criterias.create');
     }
 
     /**
@@ -60,7 +60,10 @@ class CriteriaController extends Controller
      */
     public function store(StoreCriteriaRequest $request)
     {
-        //
+        Criteria::create($request->validated());
+        Alert::success('Success!', 'Criteria has been added.');
+
+        return redirect('/criterias');
     }
 
     /**
@@ -82,7 +85,7 @@ class CriteriaController extends Controller
      */
     public function edit(Criteria $criteria)
     {
-        //
+        return view('contents.criterias.edit', compact('criteria'));
     }
 
     /**
@@ -94,7 +97,10 @@ class CriteriaController extends Controller
      */
     public function update(UpdateCriteriaRequest $request, Criteria $criteria)
     {
-        //
+        $criteria->update($request->validated());
+        Alert::success('Success!', 'Criteria has been updated.');
+
+        return redirect('/criterias');
     }
 
     /**

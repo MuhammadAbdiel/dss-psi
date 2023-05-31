@@ -24,7 +24,19 @@ class StoreCriteriaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => [
+                "required",
+                "string",
+                "min:2",
+                "max:255",
+                "unique:criterias,name"
+            ],
+            'type' => [
+                "required",
+                "string",
+                "min:2",
+                "max:255"
+            ]
         ];
     }
 }

@@ -23,6 +23,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title mb-3">Matrix Data</h5>
+          <a href="/count" class="btn btn-success"><i class="mdi mdi-calculator"></i> Calculate</a>
           <a href="/matrices/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <form action="/matrices/truncate" method="POST" class="d-inline-block">
             @csrf

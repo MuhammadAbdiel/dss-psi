@@ -29,8 +29,8 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::resource('/alternatives', AlternativeController::class)->middleware('auth');
-Route::resource('/criterias', CriteriaController::class)->middleware('auth');
+Route::resource('/alternatives', AlternativeController::class)->except(['show'])->middleware('auth');
+Route::resource('/criterias', CriteriaController::class)->except(['show'])->middleware('auth');
 Route::resource('/matrices', MatrixController::class)->middleware('auth');
 Route::post('/matrices/truncate', [MatrixController::class, 'truncate'])->middleware('auth');
 

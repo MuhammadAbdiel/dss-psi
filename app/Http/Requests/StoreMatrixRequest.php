@@ -24,7 +24,9 @@ class StoreMatrixRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'alternative_id' => ['required'],
+            'criteria_id' => ['required'],
+            'value' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

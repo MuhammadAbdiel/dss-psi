@@ -164,7 +164,7 @@ class MatrixController extends Controller
 
     public function count()
     {
-        $data = Matrix::latest()->get();
+        $data = Matrix::with('alternative')->latest()->get();
 
         $alternativeCount = Alternative::count();
         $criteriaCount = Criteria::count();
@@ -179,7 +179,7 @@ class MatrixController extends Controller
         $jumlahKriteria = count($matrix[1]);
 
         if ($jumlahAlternatif != $alternativeCount || $jumlahKriteria != $criteriaCount) {
-            Alert::error('Error', 'Data yang akan dihitung tidak lengkap! Silahkan lengkapi data terlebih dahulu.');
+            Alert::error('Error', 'Data to be calculated is incomplete! Please complete the data first.');
             return redirect('/matrices');
         } else {
             // create max and min each criteria
@@ -254,27 +254,34 @@ class MatrixController extends Controller
                 $sumPsi[$i] = array_sum($psi[$i]);
             }
 
+            $sumPsiRank = $sumPsi;
+
             // urutkan nilai $sumPsi dari yang terbesar ke terkecil
-            arsort($sumPsi);
+            arsort($sumPsiRank);
         }
 
-        dd($matrix, $max, $min, $normalisasi, $sumEachCriteria, $averageValue, $pow, $sumPow, $result, $sumResult, $criteriaWeight, $psi, $sumPsi);
+        // dd($matrix, $max, $min, $normalisasi, $sumEachCriteria, $averageValue, $pow, $sumPow, $result, $sumResult, $criteriaWeight, $psi, $sumPsi, $sumPsiRank);
 
-        // return view('contents.calculate.index', [
-        //     'data' => $data,
-        //     'matrix' => $matrix,
-        //     'max' => $max,
-        //     'min' => $min,
-        //     'normalisasi' => $normalisasi,
-        //     'sumEachCriteria' => $sumEachCriteria,
-        //     'averageValue' => $averageValue,
-        //     'pow' => $pow,
-        //     'sumPow' => $sumPow,
-        //     'result' => $result,
-        //     'sumResult' => $sumResult,
-        //     'criteriaWeight' => $criteriaWeight,
-        //     'psi' => $psi,
-        //     'sumPsi' => $sumPsi,
-        // ]);
+        return view('contents.calculate.index', [
+            'data' => $data,
+            'matrix' => $matrix,
+            'max' => $max,
+            'min' => $min,
+            'normalisasi' => $normalisasi,
+            'sumEachCriteria' => $sumEachCriteria,
+            'averageValue' => $averageValue,
+            'pow' => $pow,
+            'sumPow' => $sumPow,
+            'result' => $result,
+            'sumResult' => $sumResult,
+            'criteriaWeight' => $criteriaWeight,
+            'psi' => $psi,
+            'sumPsi' => $sumPsi,
+            'sumPsiRank' => $sumPsiRank,
+            'alternativeCount' => $alternativeCount,
+            'criteriaCount' => $criteriaCount,
+            'criterias' => Criteria::all(),
+            'alternatives' => Alternative::all(),
+        ]);
     }
 }

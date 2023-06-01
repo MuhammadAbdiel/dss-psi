@@ -129,7 +129,7 @@ class TestController extends Controller
         // urutkan nilai $sumPsi dari yang terbesar ke terkecil
         arsort($sumPsi);
 
-        // dd($sumPsi);
+        dd($sumPsi);
 
         // foreach ($matriksKeputusan as $key => $value) {
         //     $arrayColumn[$key] = array_column($matriksKeputusan, $key);

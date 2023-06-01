@@ -54,7 +54,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>Alternatif {{ $loop->iteration }}</td>
                   @foreach ($matrix[$key] as $value)
-                  <td>{{ $value }}</td>
+                  <td>{{ round($value, 4) }}</td>
                   @endforeach
                 </tr>
                 @endforeach

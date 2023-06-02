@@ -181,98 +181,104 @@ class MatrixController extends Controller
     {
         $data = Matrix::with('alternative')->latest()->get();
 
-        $alternativeCount = Alternative::count();
-        $criteriaCount = Criteria::count();
-
-        // create array 2 dimensional and push data from $data
-        $matrix = [];
-        foreach ($data as $value) {
-            $matrix[$value->alternative_id][$value->criteria_id] = $value->value;
-        }
-
-        $jumlahAlternatif = count($matrix);
-        $jumlahKriteria = count($matrix[1]);
-
-        if ($jumlahAlternatif != $alternativeCount || $jumlahKriteria != $criteriaCount) {
-            Alert::error('Error', 'Data to be calculated is incomplete! Please complete the data first.');
+        // check if data is empty
+        if ($data->isEmpty()) {
+            Alert::error('Error', 'Data to be calculated is empty! Please complete the data first.');
             return redirect('/matrices');
         } else {
-            // create max and min each criteria
-            $max = [];
-            $min = [];
-            for ($i = 1; $i <= $jumlahKriteria; $i++) {
-                $max[$i] = max(array_column($matrix, $i));
-                $min[$i] = min(array_column($matrix, $i));
+            $alternativeCount = Alternative::count();
+            $criteriaCount = Criteria::count();
+
+            // create array 2 dimensional and push data from $data
+            $matrix = [];
+            foreach ($data as $value) {
+                $matrix[$value->alternative_id][$value->criteria_id] = $value->value;
             }
 
-            // create normalisasi matrix by dividing each value with max if benefit and min if cost
-            $normalisasi = [];
-            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-                for ($j = 1; $j <= $jumlahKriteria; $j++) {
-                    if (Criteria::find($j)->type == 'benefit') {
-                        $normalisasi[$i][$j] = $matrix[$i][$j] / $max[$j];
-                    } else {
-                        $normalisasi[$i][$j] = $min[$j] / $matrix[$i][$j];
+            $jumlahAlternatif = count($matrix);
+            $jumlahKriteria = count($matrix[1]);
+
+            if ($jumlahAlternatif != $alternativeCount || $jumlahKriteria != $criteriaCount) {
+                Alert::error('Error', 'Data to be calculated is incomplete! Please complete the data first.');
+                return redirect('/matrices');
+            } else {
+                // create max and min each criteria
+                $max = [];
+                $min = [];
+                for ($i = 1; $i <= $jumlahKriteria; $i++) {
+                    $max[$i] = max(array_column($matrix, $i));
+                    $min[$i] = min(array_column($matrix, $i));
+                }
+
+                // create normalisasi matrix by dividing each value with max if benefit and min if cost
+                $normalisasi = [];
+                for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                    for ($j = 1; $j <= $jumlahKriteria; $j++) {
+                        if (Criteria::find($j)->type == 'benefit') {
+                            $normalisasi[$i][$j] = $matrix[$i][$j] / $max[$j];
+                        } else {
+                            $normalisasi[$i][$j] = $min[$j] / $matrix[$i][$j];
+                        }
                     }
                 }
-            }
 
-            // sum each column of normalisasi matrix
-            $sumEachCriteria = [];
-            for ($i = 1; $i <= $jumlahKriteria; $i++) {
-                $sumEachCriteria[$i] = array_sum(array_column($normalisasi, $i));
-            }
-
-            // 1 / jumlah alternatif kemudian dikali dengan $sumEachCriteria
-            $averageValue = array_map(function ($value) use ($jumlahAlternatif) {
-                return (1 / $jumlahAlternatif) * $value;
-            }, $sumEachCriteria);
-
-            // (nilai normalisasi - $averageValue) ^ 2
-            $pow = [];
-            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-                for ($j = 1; $j <= $jumlahKriteria; $j++) {
-                    $pow[$i][$j] = pow($normalisasi[$i][$j] - $averageValue[$j], 2);
+                // sum each column of normalisasi matrix
+                $sumEachCriteria = [];
+                for ($i = 1; $i <= $jumlahKriteria; $i++) {
+                    $sumEachCriteria[$i] = array_sum(array_column($normalisasi, $i));
                 }
-            }
 
-            // sum each column of pow
-            $sumPow = [];
-            for ($i = 1; $i <= $jumlahKriteria; $i++) {
-                $sumPow[$i] = array_sum(array_column($pow, $i));
-            }
+                // 1 / jumlah alternatif kemudian dikali dengan $sumEachCriteria
+                $averageValue = array_map(function ($value) use ($jumlahAlternatif) {
+                    return (1 / $jumlahAlternatif) * $value;
+                }, $sumEachCriteria);
 
-            // 1 - $sumPow
-            $result = array_map(function ($value) {
-                return 1 - $value;
-            }, $sumPow);
-
-            // sum result
-            $sumResult = array_sum($result);
-
-            // Menentukan bobot kriteria dengan cara membagi $result dengan $sumResult
-            $criteriaWeight = array_map(function ($value) use ($sumResult) {
-                return $value / $sumResult;
-            }, $result);
-
-            // Menentukan nilai PSI dengan cara mengalikan nilai normalisasi dengan bobot kriteria
-            $psi = [];
-            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-                for ($j = 1; $j <= $jumlahKriteria; $j++) {
-                    $psi[$i][$j] = $normalisasi[$i][$j] * $criteriaWeight[$j];
+                // (nilai normalisasi - $averageValue) ^ 2
+                $pow = [];
+                for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                    for ($j = 1; $j <= $jumlahKriteria; $j++) {
+                        $pow[$i][$j] = pow($normalisasi[$i][$j] - $averageValue[$j], 2);
+                    }
                 }
+
+                // sum each column of pow
+                $sumPow = [];
+                for ($i = 1; $i <= $jumlahKriteria; $i++) {
+                    $sumPow[$i] = array_sum(array_column($pow, $i));
+                }
+
+                // 1 - $sumPow
+                $result = array_map(function ($value) {
+                    return 1 - $value;
+                }, $sumPow);
+
+                // sum result
+                $sumResult = array_sum($result);
+
+                // Menentukan bobot kriteria dengan cara membagi $result dengan $sumResult
+                $criteriaWeight = array_map(function ($value) use ($sumResult) {
+                    return $value / $sumResult;
+                }, $result);
+
+                // Menentukan nilai PSI dengan cara mengalikan nilai normalisasi dengan bobot kriteria
+                $psi = [];
+                for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                    for ($j = 1; $j <= $jumlahKriteria; $j++) {
+                        $psi[$i][$j] = $normalisasi[$i][$j] * $criteriaWeight[$j];
+                    }
+                }
+
+                // sum each row of psi
+                $sumPsi = [];
+                for ($i = 1; $i <= $jumlahAlternatif; $i++) {
+                    $sumPsi[$i] = array_sum($psi[$i]);
+                }
+
+                $sumPsiRank = $sumPsi;
+
+                // urutkan nilai $sumPsi dari yang terbesar ke terkecil
+                arsort($sumPsiRank);
             }
-
-            // sum each row of psi
-            $sumPsi = [];
-            for ($i = 1; $i <= $jumlahAlternatif; $i++) {
-                $sumPsi[$i] = array_sum($psi[$i]);
-            }
-
-            $sumPsiRank = $sumPsi;
-
-            // urutkan nilai $sumPsi dari yang terbesar ke terkecil
-            arsort($sumPsiRank);
         }
 
         // dd($matrix, $max, $min, $normalisasi, $sumEachCriteria, $averageValue, $pow, $sumPow, $result, $sumResult, $criteriaWeight, $psi, $sumPsi, $sumPsiRank);

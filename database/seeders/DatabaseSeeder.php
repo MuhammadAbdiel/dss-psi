@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AlternativeSeeder::class,
             CriteriaSeeder::class,
-            MatrixSeeder::class,
+            // MatrixSeeder::class,
             // DecisionSeeder::class,
         ]);
     }

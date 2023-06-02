@@ -28,6 +28,18 @@
           <div class="card-body">
             <h4 class="card-title mb-3">Edit Criteria</h4>
             <div class="form-group row">
+              <label for="code" class="col-sm-3 text-left control-label col-form-label">Code</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code"
+                  placeholder="Code Here" value="{{ old('code', $criteria->code) }}">
+                @error('code')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row">
               <label for="name" class="col-sm-3 text-left control-label col-form-label">Name</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"

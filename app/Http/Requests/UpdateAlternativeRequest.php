@@ -24,6 +24,12 @@ class UpdateAlternativeRequest extends FormRequest
     public function rules()
     {
         return [
+            'code' => [
+                "required",
+                "string",
+                "min:2",
+                "max:255",
+            ],
             'name' => [
                 "required",
                 "string",

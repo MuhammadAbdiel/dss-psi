@@ -31,7 +31,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::resource('/alternatives', AlternativeController::class)->except(['show'])->middleware('auth');
 Route::resource('/criterias', CriteriaController::class)->except(['show'])->middleware('auth');
-Route::resource('/matrices', MatrixController::class)->middleware('auth');
+Route::resource('/matrices', MatrixController::class)->except(['show'])->middleware('auth');
 Route::post('/matrices/truncate', [MatrixController::class, 'truncate'])->middleware('auth');
 
 Route::get('/count', [MatrixController::class, 'count'])->middleware('auth');

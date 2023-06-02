@@ -22,19 +22,24 @@ class MatrixController extends Controller
     public function index(Request $request)
     {
         $data = Matrix::with('alternative')->latest()->get();
-        // dd($data->alternative->name);
 
         $alternativeAmount = Alternative::count();
         $criteriaAmount = Criteria::count();
 
+        // $pluckId = $data->pluck('id')->toArray();
+
+        // $chunk = array_chunk($pluckId, 5, true);
+
         // create array 2 dimensional and push data from $data
         $matrix = [];
         foreach ($data as $value) {
-            $matrix[$value->alternative_id][$value->criteria_id] = $value->value;
+            $matrix[$value->alternative_id][$value->criteria_id] = (object) [
+                'alternative_id' => $value->alternative_id,
+                'criteria_id' => $value->criteria_id,
+                'id' => $value->id,
+                'value' => $value->value,
+            ];
         }
-        // dd($matrix);
-
-        // $keys = array_keys($matrix);
 
         // // create query for get data alternative name from Matrix and dont print duplicate data
         // $query = Matrix::select('alternative_id')->distinct()->get();
@@ -129,7 +134,11 @@ class MatrixController extends Controller
      */
     public function edit(Matrix $matrix)
     {
-        //
+        return view('contents.matrices.edit', [
+            'matrix' => $matrix,
+            'criterias' => Criteria::latest()->get(),
+            'alternatives' => Alternative::latest()->get(),
+        ]);
     }
 
     /**
@@ -141,7 +150,10 @@ class MatrixController extends Controller
      */
     public function update(UpdateMatrixRequest $request, Matrix $matrix)
     {
-        //
+        $matrix->update($request->validated());
+        Alert::success('Success', 'Value matrix has been updated.');
+
+        return redirect('/matrices');
     }
 
     /**
@@ -152,7 +164,10 @@ class MatrixController extends Controller
      */
     public function destroy(Matrix $matrix)
     {
-        //
+        $matrix->delete();
+        Alert::success('Success', 'Value matrix has been deleted.');
+
+        return redirect('/matrices');
     }
 
     public function truncate()

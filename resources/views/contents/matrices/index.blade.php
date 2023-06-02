@@ -28,7 +28,7 @@
           <form action="/matrices/truncate" method="POST" class="d-inline-block">
             @csrf
             <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i>
-              Delete Data</button>
+              Delete All Data</button>
           </form>
           <div class="table-responsive mt-3">
             <table id="zero_config" class="table table-striped table-bordered matrix-datatable">
@@ -53,9 +53,27 @@
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>Alternatif {{ $loop->iteration }}</td>
+
                   @foreach ($matrix[$key] as $value)
-                  <td>{{ round($value, 4) }}</td>
+
+                  <td>
+                    <div class="d-flex flex-row justify-content-between">
+                      {{ round($value->value, 4) }}
+                      <div>
+                        <a href="/matrices/{{ $value->id }}/edit" class="badge badge-warning text-white"><i
+                            class="mdi mdi-pencil"></i></a>
+                        {{-- <a href="javascript:void(0)" class="badge badge-danger btn-delete"><i
+                            class="mdi mdi-delete"></i></a> --}}
+                      </div>
+                    </div>
+                  </td>
+
+                  {{-- <form action="/matrices/{{ $value->id }}" id="delete-form" method="POST">
+                    @csrf
+                    @method('DELETE')
+                  </form> --}}
                   @endforeach
+
                 </tr>
                 @endforeach
 
@@ -81,6 +99,24 @@
 @endsection
 
 @section('script')
+<script>
+  $(function () {
+    $('.btn-delete').on('click', function () {
+      Swal.fire({
+        title: 'Delete Value Matrix!',
+        text: "Are you sure want to delete this value matrix?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-form').submit();
+        }
+      });
+    });
+  });
+</script>
+
 {{-- <script>
   $(function () {
 

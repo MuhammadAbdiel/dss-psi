@@ -23,18 +23,23 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title mb-3">Matrix Data</h5>
-          <a href="/count" class="btn btn-success"><i class="mdi mdi-calculator"></i> Calculate</a>
           <a href="/matrices/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
-          <form action="/matrices/truncate" method="POST" class="d-inline-block">
+
+          @if (!$data->isEmpty())
+          <a href="/count" class="btn btn-success"><i class="mdi mdi-calculator"></i> Calculate</a>
+          <a href="javascript:void(0)" class="btn btn-danger btn-truncate"><i class="mdi mdi-delete"></i>
+            Delete All Data</a>
+          <form action="/matrices/truncate" method="POST" id="truncate-form" class="d-inline-block">
             @csrf
-            <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i>
-              Delete All Data</button>
           </form>
+          @endif
+
           <div class="table-responsive mt-3">
             <table id="zero_config" class="table table-striped table-bordered matrix-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
+                  <th>Code</th>
                   <th>Alternatif</th>
 
                   @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
@@ -49,12 +54,13 @@
                 $keys = array_keys($matrix)
                 @endphp
 
-                @foreach ($keys as $key)
+                @foreach ($matrix as $key)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>Alternatif {{ $loop->iteration }}</td>
+                  <td>{{ $matrix[$loop->iteration][1]->alternative_code }}</td>
+                  <td>{{ $matrix[$loop->iteration][1]->alternative_name }}</td>
 
-                  @foreach ($matrix[$key] as $value)
+                  @foreach ($key as $value)
 
                   <td>
                     <div class="d-flex flex-row justify-content-between">
@@ -81,6 +87,7 @@
               <tfoot>
                 <tr>
                   <th>No.</th>
+                  <th>Code</th>
                   <th>Alternatif</th>
 
                   @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
@@ -114,32 +121,20 @@
         }
       });
     });
+
+    $('.btn-truncate').on('click', function () {
+      Swal.fire({
+        title: 'Delete All Data!',
+        text: "Are you sure want to delete all data?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('truncate-form').submit();
+        }
+      });
+    });
   });
 </script>
-
-{{-- <script>
-  $(function () {
-
-    var table = $('.matrix-datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        responsive: true,
-        ordering: true,
-        ajax: {
-          url: "{{ url()->current() }}"
-        },
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'alternative', name: 'alternative.name'},
-            {
-                data: 'action', 
-                name: 'action', 
-                orderable: true, 
-                searchable: true
-            },
-        ]
-    });
-
-  });
-</script> --}}
 @endsection

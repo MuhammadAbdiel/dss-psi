@@ -29,6 +29,7 @@
               <thead>
                 <tr>
                   <th>No.</th>
+                  <th>Code</th>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Action</th>
@@ -39,6 +40,7 @@
               <tfoot>
                 <tr>
                   <th>No.</th>
+                  <th>Code</th>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Action</th>
@@ -68,6 +70,7 @@
         },
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'code', name: 'code'},
             {data: 'name', name: 'name'},
             {data: 'type', name: 'type'},
             {

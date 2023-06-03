@@ -14,184 +14,23 @@ class MatrixSeeder extends Seeder
      */
     public function run()
     {
-        $matrix = [
-            [
-                'alternative_id' => 1,
-                'criteria_id' => 1,
-                'value' => 0.5,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 1,
-                'criteria_id' => 2,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 1,
-                'criteria_id' => 3,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 1,
-                'criteria_id' => 4,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 1,
-                'criteria_id' => 5,
-                'value' => 0.8,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 2,
-                'criteria_id' => 1,
-                'value' => 0.8,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 2,
-                'criteria_id' => 2,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 2,
-                'criteria_id' => 3,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 2,
-                'criteria_id' => 4,
-                'value' => 0.5,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 2,
-                'criteria_id' => 5,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 3,
-                'criteria_id' => 1,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 3,
-                'criteria_id' => 2,
-                'value' => 0.3,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 3,
-                'criteria_id' => 3,
-                'value' => 0.4,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 3,
-                'criteria_id' => 4,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 3,
-                'criteria_id' => 5,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 4,
-                'criteria_id' => 1,
-                'value' => 0.2,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 4,
-                'criteria_id' => 2,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 4,
-                'criteria_id' => 3,
-                'value' => 0.5,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 4,
-                'criteria_id' => 4,
-                'value' => 0.9,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 4,
-                'criteria_id' => 5,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 5,
-                'criteria_id' => 1,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 5,
-                'criteria_id' => 2,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 5,
-                'criteria_id' => 3,
-                'value' => 0.4,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 5,
-                'criteria_id' => 4,
-                'value' => 0.7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'alternative_id' => 5,
-                'criteria_id' => 5,
-                'value' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ];
+        $csvFile = fopen(base_path('database/data/matrix.csv'), 'r');
 
-        Matrix::insert($matrix);
+        $firstLine = true;
+        while (($data = fgetcsv($csvFile, 2000, ';')) !== FALSE) {
+            if (!$firstLine) {
+                Matrix::create([
+                    'id' => $data[0],
+                    'alternative_id' => $data[1],
+                    'criteria_id' => $data[2],
+                    'value' => $data[3],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+            $firstLine = false;
+        }
+
+        fclose($csvFile);
     }
 }

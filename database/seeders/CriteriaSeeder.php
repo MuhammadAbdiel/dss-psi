@@ -17,35 +17,35 @@ class CriteriaSeeder extends Seeder
         $criteria = [
             [
                 'code' => 'C1',
-                'name' => 'Jurusan yang ditawarkan oleh sekolah tersebut',
+                'name' => 'Jurusan yang ditawarkan',
                 'type' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'C2',
-                'name' => 'Prestasi yang sudah dicapai sekolah tersebut',
+                'name' => 'Prestasi yang sudah dicapai',
                 'type' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'C3',
-                'name' => 'Ekstra Kurikuler yang ditawarkan sekolah tersebut',
+                'name' => 'Ekstra Kurikuler yang ditawarkan',
                 'type' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'C4',
-                'name' => 'Akreditasi yang sudah diperoleh sekolah tersebut',
+                'name' => 'Akreditasi yang sudah diperoleh',
                 'type' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'C5',
-                'name' => 'Fasilitas yang di sediakan oleh sekolah',
+                'name' => 'Fasilitas yang disediakan',
                 'type' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now()

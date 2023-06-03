@@ -30,7 +30,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -44,7 +44,7 @@
 
                 @foreach ($keys as $key)
                 <tr>
-                  <td>Alternatif {{ $loop->iteration }}</td>
+                  <td>A{{ $loop->iteration }}</td>
                   @foreach ($matrix[$key] as $value)
                   <td>{{ round($value, 4) }}</td>
                   @endforeach
@@ -56,7 +56,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -74,7 +74,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -88,7 +88,7 @@
 
                 @foreach ($keys as $key)
                 <tr>
-                  <td>Alternatif {{ $loop->iteration }}</td>
+                  <td>A{{ $loop->iteration }}</td>
                   @foreach ($normalisasi[$key] as $value)
                   <td>{{ round($value, 4) }}</td>
                   @endforeach
@@ -100,7 +100,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -117,7 +117,7 @@
               <thead>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -135,7 +135,7 @@
               <tfoot>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -152,7 +152,7 @@
               <thead>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -170,7 +170,7 @@
               <tfoot>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -188,7 +188,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -202,7 +202,7 @@
 
                 @foreach ($keys as $key)
                 <tr>
-                  <td>Alternatif {{ $loop->iteration }}</td>
+                  <td>A{{ $loop->iteration }}</td>
                   @foreach ($pow[$key] as $value)
                   <td>{{ round($value, 4) }}</td>
                   @endforeach
@@ -214,7 +214,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -231,7 +231,7 @@
               <thead>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -249,7 +249,7 @@
               <tfoot>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -266,7 +266,7 @@
               <thead>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -286,7 +286,7 @@
               <tfoot>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -304,7 +304,7 @@
               <thead>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -322,7 +322,7 @@
               <tfoot>
                 <tr>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -340,7 +340,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -354,7 +354,7 @@
 
                 @foreach ($keys as $key)
                 <tr>
-                  <td>Alternatif {{ $loop->iteration }}</td>
+                  <td>A{{ $loop->iteration }}</td>
                   @foreach ($psi[$key] as $value)
                   <td>{{ round($value, 4) }}</td>
                   @endforeach
@@ -366,7 +366,7 @@
                 <tr>
                   <th>Alternatif</th>
 
-                  @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
+                  @for ($i = 0; $i < count($criterias); $i++) <th>C{{ $i + 1 }}</th>
 
                     @endfor
 
@@ -396,7 +396,7 @@
 
                     @foreach ($keys as $key)
                     <tr>
-                      <td>Alternatif {{ $key }}</td>
+                      <td>A{{ $key }}</td>
                       <td>{{ round($sumPsi[$key], 4) }}</td>
                     </tr>
                     @endforeach
@@ -432,7 +432,7 @@
 
                     @foreach ($keys as $key)
                     <tr>
-                      <td>Alternatif {{ $key }}</td>
+                      <td>A{{ $key }}</td>
                       <td>{{ round($sumPsiRank[$key], 4) }}</td>
                     </tr>
                     @endforeach
@@ -461,14 +461,41 @@
 
 @section('script')
 <script>
-  $('#matriks_keputusan').DataTable();
-  $('#normalisasi').DataTable();
-  $('#sum_normalisasi').DataTable();
-  $('#average_value').DataTable();
-  $('#pow').DataTable();
-  $('#sum_pow').DataTable();
-  $('#result').DataTable();
-  $('#bobot_kriteria').DataTable();
-  $('#psi').DataTable();
+  $('#matriks_keputusan').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#normalisasi').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#sum_normalisasi').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#average_value').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#pow').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#sum_pow').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#result').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#bobot_kriteria').DataTable({
+    'ordering': false,
+    'paging': false
+  });
+  $('#psi').DataTable({
+    'ordering': false,
+    'paging': false
+  });
 </script>
 @endsection

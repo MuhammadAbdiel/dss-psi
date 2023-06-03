@@ -21,53 +21,25 @@ class MatrixController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Matrix::with('alternative')->latest()->get();
+        $data = Matrix::with('alternative', 'criteria')->latest()->get();
 
         $alternativeAmount = Alternative::count();
         $criteriaAmount = Criteria::count();
-
-        // $pluckId = $data->pluck('id')->toArray();
-
-        // $chunk = array_chunk($pluckId, 5, true);
 
         // create array 2 dimensional and push data from $data
         $matrix = [];
         foreach ($data as $value) {
             $matrix[$value->alternative_id][$value->criteria_id] = (object) [
                 'alternative_id' => $value->alternative_id,
+                'alternative_code' => $value->alternative->code,
+                'alternative_name' => $value->alternative->name,
                 'criteria_id' => $value->criteria_id,
+                'criteria_code' => $value->criteria->code,
+                'criteria_name' => $value->criteria->name,
                 'id' => $value->id,
                 'value' => $value->value,
             ];
         }
-
-        // // create query for get data alternative name from Matrix and dont print duplicate data
-        // $query = Matrix::select('alternative_id')->distinct()->get();
-        // $alternativeName = [];
-        // foreach ($query as $value) {
-        //     $alternativeName[$value->alternative_id] = $value->alternative->name;
-        // }
-        // // dd($alternativeName);
-
-        // if ($request->ajax()) {
-        //     return Datatables::of($data)
-        //         // print $alternativeName from query dont print duplicate data
-        //         ->addColumn('alternative', function (Matrix $matrix) use ($alternativeName) {
-        //             return $alternativeName[$matrix->alternative_id];
-        //         })
-        //         ->addColumn('action', function ($row) {
-        //             $actionBtn = '<a href="/matrices/ ' . $row->id . '/edit" class="btn btn-warning"><i
-        //                             class="mdi mdi-pencil"></i>
-        //                         Edit</a>
-        //                         <a href="/matrices/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
-        //                             class="mdi mdi-delete"></i>
-        //                         Delete</a>';
-        //             return $actionBtn;
-        //         })
-        //         ->rawColumns(['action', 'alternative'])
-        //         ->addIndexColumn()
-        //         ->make(true);
-        // }
 
         return view('contents.matrices.index', [
             'alternativeAmount' => $alternativeAmount,
@@ -75,6 +47,7 @@ class MatrixController extends Controller
             'criterias' => Criteria::all(),
             'alternatives' => Alternative::all(),
             'matrix' => $matrix,
+            'data' => $data,
         ]);
     }
 
@@ -173,13 +146,13 @@ class MatrixController extends Controller
     public function truncate()
     {
         Matrix::truncate();
-        Alert::success('Success', 'Matrix has been truncated!');
+        Alert::success('Success', 'Matrix has been deleted.');
         return redirect('/matrices');
     }
 
     public function count()
     {
-        $data = Matrix::with('alternative')->latest()->get();
+        $data = Matrix::with('alternative', 'criteria')->latest()->get();
 
         // check if data is empty
         if ($data->isEmpty()) {
@@ -193,6 +166,14 @@ class MatrixController extends Controller
             $matrix = [];
             foreach ($data as $value) {
                 $matrix[$value->alternative_id][$value->criteria_id] = $value->value;
+                // $matrix[$value->alternative_id][$value->criteria_id] = (object) [
+                //     'alternative_id' => $value->alternative_id,
+                //     'alternative_name' => $value->alternative->name,
+                //     'criteria_id' => $value->criteria_id,
+                //     'criteria_name' => $value->criteria->name,
+                //     'id' => $value->id,
+                //     'value' => $value->value,
+                // ];
             }
 
             $jumlahAlternatif = count($matrix);
@@ -210,7 +191,7 @@ class MatrixController extends Controller
                     $min[$i] = min(array_column($matrix, $i));
                 }
 
-                // create normalisasi matrix by dividing each value with max if benefit and min if cost
+                // create matrix normalize by dividing each value with max if benefit and min if cost
                 $normalisasi = [];
                 for ($i = 1; $i <= $jumlahAlternatif; $i++) {
                     for ($j = 1; $j <= $jumlahKriteria; $j++) {
@@ -222,18 +203,18 @@ class MatrixController extends Controller
                     }
                 }
 
-                // sum each column of normalisasi matrix
+                // sum each column of matrix normalized
                 $sumEachCriteria = [];
                 for ($i = 1; $i <= $jumlahKriteria; $i++) {
                     $sumEachCriteria[$i] = array_sum(array_column($normalisasi, $i));
                 }
 
-                // 1 / jumlah alternatif kemudian dikali dengan $sumEachCriteria
+                // 1 / alternative amount, then times with $sumEachCriteria
                 $averageValue = array_map(function ($value) use ($jumlahAlternatif) {
                     return (1 / $jumlahAlternatif) * $value;
                 }, $sumEachCriteria);
 
-                // (nilai normalisasi - $averageValue) ^ 2
+                // (normalize value - $averageValue) ^ 2
                 $pow = [];
                 for ($i = 1; $i <= $jumlahAlternatif; $i++) {
                     for ($j = 1; $j <= $jumlahKriteria; $j++) {
@@ -255,12 +236,12 @@ class MatrixController extends Controller
                 // sum result
                 $sumResult = array_sum($result);
 
-                // Menentukan bobot kriteria dengan cara membagi $result dengan $sumResult
+                // Define criteria weight with divide $result with $sumResult
                 $criteriaWeight = array_map(function ($value) use ($sumResult) {
                     return $value / $sumResult;
                 }, $result);
 
-                // Menentukan nilai PSI dengan cara mengalikan nilai normalisasi dengan bobot kriteria
+                // Define PSI value with times normalize value with criteria weight
                 $psi = [];
                 for ($i = 1; $i <= $jumlahAlternatif; $i++) {
                     for ($j = 1; $j <= $jumlahKriteria; $j++) {
@@ -276,7 +257,7 @@ class MatrixController extends Controller
 
                 $sumPsiRank = $sumPsi;
 
-                // urutkan nilai $sumPsi dari yang terbesar ke terkecil
+                // sort $sumPsi value from highest to lowest
                 arsort($sumPsiRank);
             }
         }

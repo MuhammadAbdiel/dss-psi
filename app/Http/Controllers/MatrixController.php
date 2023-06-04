@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Matrix;
 use App\Models\Criteria;
-use App\Models\Decision;
 use App\Models\Alternative;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -166,14 +165,6 @@ class MatrixController extends Controller
             $matrix = [];
             foreach ($data as $value) {
                 $matrix[$value->alternative_id][$value->criteria_id] = $value->value;
-                // $matrix[$value->alternative_id][$value->criteria_id] = (object) [
-                //     'alternative_id' => $value->alternative_id,
-                //     'alternative_name' => $value->alternative->name,
-                //     'criteria_id' => $value->criteria_id,
-                //     'criteria_name' => $value->criteria->name,
-                //     'id' => $value->id,
-                //     'value' => $value->value,
-                // ];
             }
 
             $jumlahAlternatif = count($matrix);

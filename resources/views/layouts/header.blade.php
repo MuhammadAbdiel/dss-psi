@@ -9,7 +9,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
+  {{--
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png"> --}}
   <title>SPK</title>
   <!-- Custom CSS -->
   <link rel="stylesheet" type="text/css" href="/assets/libs/select2/dist/css/select2.min.css">

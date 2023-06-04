@@ -12,7 +12,7 @@
         </li>
         <li class="sidebar-item {{ Request::is('/alternatives*') ? 'selected' : '' }}"> <a
             class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/alternatives*') ? 'active' : '' }}"
-            href="/alternatives" aria-expanded="false"><i class="mdi mdi-cube"></i><span
+            href="/alternatives" aria-expanded="false"><i class="mdi mdi-target"></i><span
               class="hide-menu">Alternatives</span></a>
         </li>
         <li class="sidebar-item {{ Request::is('/criterias*') ? 'selected' : '' }}"> <a

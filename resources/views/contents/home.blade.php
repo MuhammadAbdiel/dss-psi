@@ -30,11 +30,38 @@
   <!-- ============================================================== -->
   <div class="row">
     <!-- Column -->
-    <div class="col-md-12 col-lg-12">
+    {{-- <div class="col-md-12 col-lg-12">
       <div class="card card-hover">
         <div class="box bg-cyan text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
           <h6 class="text-white">Dashboard</h6>
+        </div>
+      </div>
+    </div> --}}
+    <div class="col-md-12 col-lg-6">
+      <div class="card card-hover">
+        <div class="box bg-info text-center">
+          <div class="d-flex align-items-center justify-content-center p-3">
+            <h1 class="font-light text-white"><i class="mdi mdi-target"></i></h1>
+            <div class="ml-5">
+              <h6 class="text-white">Alternatives</h6>
+              <h4 class="text-white">{{ $alternativeCount }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-12 col-lg-6">
+      <div class="card card-hover">
+        <div class="box bg-success text-center">
+          <div class="d-flex align-items-center justify-content-center p-3">
+            <h1 class="font-light text-white"><i class="mdi mdi-format-list-bulleted"></i></h1>
+            <div class="ml-5">
+              <h6 class="text-white">Criterias</h6>
+              <h4 class="text-white">{{ $criteriaCount }}</h4>
+            </div>
+          </div>
         </div>
       </div>
     </div>

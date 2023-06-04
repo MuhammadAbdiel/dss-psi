@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Criteria;
+use App\Models\Alternative;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MatrixController;
 use App\Http\Controllers\CriteriaController;
-use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\AlternativeController;
 
 /*
@@ -22,7 +23,10 @@ use App\Http\Controllers\AlternativeController;
 Route::get('/test', [TestController::class, 'index']);
 
 Route::get('/', function () {
-  return view('contents.home');
+  return view('contents.home', [
+    'alternativeCount' => Alternative::count(),
+    'criteriaCount' => Criteria::count(),
+  ]);
 })->middleware(['auth']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

@@ -27,7 +27,7 @@ class CriteriaController extends Controller
                                 Edit</a>
                                 <a href="/criterias/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
                                     class="mdi mdi-delete"></i>
-                                Delete</a>';
+                                Hapus</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -35,8 +35,8 @@ class CriteriaController extends Controller
                 ->make(true);
         }
 
-        $title = 'Delete Criteria!';
-        $text = 'Are you sure you want to delete this criteria?';
+        $title = 'Hapus Kriteria!';
+        $text = 'Apakah anda yakin ingin menghapus kriteria ini?';
         confirmDelete($title, $text);
 
         return view('contents.criterias.index');
@@ -61,7 +61,7 @@ class CriteriaController extends Controller
     public function store(StoreCriteriaRequest $request)
     {
         Criteria::create($request->validated());
-        Alert::success('Success!', 'Criteria has been added.');
+        Alert::success('Berhasil!', 'Kriteria berhasil ditambahkan.');
 
         return redirect('/criterias');
     }
@@ -98,7 +98,7 @@ class CriteriaController extends Controller
     public function update(UpdateCriteriaRequest $request, Criteria $criteria)
     {
         $criteria->update($request->validated());
-        Alert::success('Success!', 'Criteria has been updated.');
+        Alert::success('Berhasil!', 'Kriteria berhasil diubah.');
 
         return redirect('/criterias');
     }
@@ -112,7 +112,7 @@ class CriteriaController extends Controller
     public function destroy(Criteria $criteria)
     {
         Criteria::destroy($criteria->id);
-        Alert::success('Success!', 'Criteria has been deleted.');
+        Alert::success('Berhasil!', 'Kriteria berhasil dihapus.');
 
         return redirect('/criterias');
     }

@@ -4,12 +4,12 @@
 <div class="page-breadcrumb">
   <div class="row">
     <div class="col-12 d-flex no-block align-items-center">
-      <h4 class="page-title">Matrices</h4>
+      <h4 class="page-title">Matriks</h4>
       <div class="ml-auto text-right">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Matrices</li>
+            <li class="breadcrumb-item active" aria-current="page">Matriks</li>
           </ol>
         </nav>
       </div>
@@ -22,13 +22,13 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title mb-3">Matrix Data</h5>
-          <a href="/matrices/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <h5 class="card-title mb-3">Data Matriks</h5>
+          <a href="/matrices/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Tambah Data</a>
 
           @if (!$data->isEmpty())
-          <a href="/count" class="btn btn-success"><i class="mdi mdi-calculator"></i> Calculate</a>
+          <a href="/count" class="btn btn-success"><i class="mdi mdi-calculator"></i> Hitung</a>
           <a href="javascript:void(0)" class="btn btn-danger btn-truncate"><i class="mdi mdi-delete"></i>
-            Delete All Data</a>
+            Hapus Semua Data</a>
           <form action="/matrices/truncate" method="POST" id="truncate-form" class="d-inline-block">
             @csrf
           </form>
@@ -39,7 +39,7 @@
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Code</th>
+                  <th>Kode</th>
                   <th>Alternatif</th>
 
                   @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
@@ -87,7 +87,7 @@
               <tfoot>
                 <tr>
                   <th>No.</th>
-                  <th>Code</th>
+                  <th>Kode</th>
                   <th>Alternatif</th>
 
                   @for ($i = 0; $i < count($criterias); $i++) <th>{{ $criterias[$i]->name }}</th>
@@ -110,11 +110,12 @@
   $(function () {
     $('.btn-delete').on('click', function () {
       Swal.fire({
-        title: 'Delete Value Matrix!',
-        text: "Are you sure want to delete this value matrix?",
+        title: 'Hapus Nilai Matriks!',
+        text: "Apakah anda yakin ingin menghapus nilai matriks ini?",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!'
+        cancelButtonText: '<i class="fa fa-times"></i>&nbsp; Batal',
+        confirmButtonText: '<i class="fa fa-check"></i>&nbsp; Ya, Hapus!'
       }).then((result) => {
         if (result.isConfirmed) {
             document.getElementById('delete-form').submit();
@@ -124,11 +125,12 @@
 
     $('.btn-truncate').on('click', function () {
       Swal.fire({
-        title: 'Delete All Data!',
-        text: "Are you sure want to delete all data?",
+        title: 'Hapus Semua Data!',
+        text: "Apakah anda yakin ingin menghapus semua data matriks?",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!'
+        cancelButtonText: '<i class="fa fa-times"></i>&nbsp; Batal',
+        confirmButtonText: '<i class="fa fa-check"></i>&nbsp; Ya, Hapus!'
       }).then((result) => {
         if (result.isConfirmed) {
             document.getElementById('truncate-form').submit();

@@ -20,7 +20,7 @@ use App\Http\Controllers\AlternativeController;
 |
 */
 
-Route::get('/test', [TestController::class, 'index']);
+// Route::get('/test', [TestController::class, 'index']);
 
 Route::get('/', function () {
   return view('contents.home', [
@@ -37,5 +37,6 @@ Route::resource('/alternatives', AlternativeController::class)->except(['show'])
 Route::resource('/criterias', CriteriaController::class)->except(['show'])->middleware('auth');
 Route::resource('/matrices', MatrixController::class)->except(['show'])->middleware('auth');
 Route::post('/matrices/truncate', [MatrixController::class, 'truncate'])->middleware('auth');
+Route::get('/matrices/alternatives', [MatrixController::class, 'rank'])->middleware('auth');
 
 Route::get('/count', [MatrixController::class, 'count'])->middleware('auth');

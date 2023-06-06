@@ -27,7 +27,7 @@ class AlternativeController extends Controller
                                 Edit</a>
                                 <a href="/alternatives/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
                                     class="mdi mdi-delete"></i>
-                                Delete</a>';
+                                Hapus</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -35,8 +35,8 @@ class AlternativeController extends Controller
                 ->make(true);
         }
 
-        $title = 'Delete Alternative!';
-        $text = 'Are you sure you want to delete this alternative?';
+        $title = 'Hapus Alternatif!';
+        $text = 'Apakah Anda yakin ingin menghapus alternatif ini?';
         confirmDelete($title, $text);
 
         return view('contents.alternatives.index');
@@ -61,7 +61,7 @@ class AlternativeController extends Controller
     public function store(StoreAlternativeRequest $request)
     {
         Alternative::create($request->validated());
-        Alert::success('Success', 'Alternative has been added.');
+        Alert::success('Berhasil!', 'Alternatif berhasil ditambahkan.');
 
         return redirect('/alternatives');
     }
@@ -98,7 +98,7 @@ class AlternativeController extends Controller
     public function update(UpdateAlternativeRequest $request, Alternative $alternative)
     {
         $alternative->update($request->validated());
-        Alert::success('Success!', 'Alternative has been updated.');
+        Alert::success('Berhasil!', 'Alternatif berhasil diubah.');
 
         return redirect('/alternatives');
     }
@@ -112,7 +112,7 @@ class AlternativeController extends Controller
     public function destroy(Alternative $alternative)
     {
         Alternative::destroy($alternative->id);
-        Alert::success('Success!', 'Alternative has been deleted.');
+        Alert::success('Berhasil!', 'Alternatif berhasil dihapus.');
 
         return redirect('/alternatives');
     }

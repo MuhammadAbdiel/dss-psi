@@ -192,13 +192,14 @@
         
         $('.btn-logout').on('click', function () {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Apakah anda yakin?',
+                text: "Anda akan keluar dari aplikasi ini!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Log me out!'
+                cancelButtonText:'<i class="fa fa-times"></i>&nbsp; Batal',
+                confirmButtonText: '<i class="fa fa-check"></i>&nbsp; Ya, Keluar!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('logout-form').submit();

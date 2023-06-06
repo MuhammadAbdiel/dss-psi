@@ -13,17 +13,17 @@
         <li class="sidebar-item {{ Request::is('/alternatives*') ? 'selected' : '' }}"> <a
             class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/alternatives*') ? 'active' : '' }}"
             href="/alternatives" aria-expanded="false"><i class="mdi mdi-target"></i><span
-              class="hide-menu">Alternatives</span></a>
+              class="hide-menu">Alternatif</span></a>
         </li>
         <li class="sidebar-item {{ Request::is('/criterias*') ? 'selected' : '' }}"> <a
             class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/criterias*') ? 'active' : '' }}"
             href="/criterias" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span
-              class="hide-menu">Criterias</span></a>
+              class="hide-menu">Kriteria</span></a>
         </li>
         <li class="sidebar-item {{ Request::is('/matrices*') ? 'selected' : '' }}"> <a
             class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/matrices*') ? 'active' : '' }}"
             href="/matrices" aria-expanded="false"><i class="mdi mdi-counter"></i><span
-              class="hide-menu">Matrices</span></a>
+              class="hide-menu">Matriks</span></a>
         </li>
       </ul>
     </nav>

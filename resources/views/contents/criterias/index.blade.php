@@ -4,12 +4,12 @@
 <div class="page-breadcrumb">
   <div class="row">
     <div class="col-12 d-flex no-block align-items-center">
-      <h4 class="page-title">Criterias</h4>
+      <h4 class="page-title">Kriteria</h4>
       <div class="ml-auto text-right">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Criterias</li>
+            <li class="breadcrumb-item active" aria-current="page">Kriteria</li>
           </ol>
         </nav>
       </div>
@@ -22,17 +22,17 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title mb-3">Criteria Data</h5>
-          <a href="/criterias/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <h5 class="card-title mb-3">Data Kriteria</h5>
+          <a href="/criterias/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Tambah Data</a>
           <div class="table-responsive mt-3">
             <table class="table table-striped table-bordered criteria-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Code</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Action</th>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Tipe</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,10 +40,10 @@
               <tfoot>
                 <tr>
                   <th>No.</th>
-                  <th>Code</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Action</th>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Tipe</th>
+                  <th>Aksi</th>
                 </tr>
               </tfoot>
             </table>

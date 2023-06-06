@@ -4,12 +4,12 @@
 <div class="page-breadcrumb">
   <div class="row">
     <div class="col-12 d-flex no-block align-items-center">
-      <h4 class="page-title">Alternatives</h4>
+      <h4 class="page-title">Alternatif</h4>
       <div class="ml-auto text-right">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Alternatives</li>
+            <li class="breadcrumb-item active" aria-current="page">Alternatif</li>
           </ol>
         </nav>
       </div>
@@ -22,25 +22,26 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title mb-3">Alternative Data</h5>
-          <a href="/alternatives/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <h5 class="card-title mb-3">Data Alternatif</h5>
+          <a href="/alternatives/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Tambah Data</a>
           <div class="table-responsive mt-3">
             <table class="table table-striped table-bordered alternative-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Code</th>
-                  <th>Name</th>
-                  <th>Action</th>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
               </tbody>
               <tfoot>
                 <tr>
-                  <th>Code</th>
                   <th>No.</th>
-                  <th>Action</th>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Aksi</th>
                 </tr>
               </tfoot>
             </table>

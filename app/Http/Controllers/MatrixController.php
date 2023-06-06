@@ -149,6 +149,15 @@ class MatrixController extends Controller
         return redirect('/matrices');
     }
 
+    public function rank()
+    {
+        $alternatives = Alternative::all();
+
+        return response()->json([
+            'alternatives' => $alternatives,
+        ]);
+    }
+
     public function count()
     {
         $data = Matrix::with('alternative', 'criteria')->latest()->get();

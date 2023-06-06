@@ -4,13 +4,13 @@
 <div class="page-breadcrumb">
   <div class="row">
     <div class="col-12 d-flex no-block align-items-center">
-      <h4 class="page-title">Add Matrix Value</h4>
+      <h4 class="page-title">Tambahkan Nilai Matriks</h4>
       <div class="ml-auto text-right">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/matrices">Matrices</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Matrix Value</li>
+            <li class="breadcrumb-item"><a href="/matrices">Matriks</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Nilai Matriks</li>
           </ol>
         </nav>
       </div>
@@ -25,13 +25,13 @@
         <form action="/matrices" method="POST" class="form-horizontal">
           @csrf
           <div class="card-body">
-            <h4 class="card-title mb-3">Add Matrix Value</h4>
+            <h4 class="card-title mb-3">Tambahkan Nilai Matriks</h4>
             <div class="form-group row">
-              <label class="col-md-3 m-t-15">Alternatives</label>
+              <label class="col-md-3 m-t-15">Alternatif</label>
               <div class="col-md-9">
                 <select class="select2 form-control custom-select" style="width: 100%; height:36px;"
                   name="alternative_id">
-                  <option>Select Alternative</option>
+                  <option>Pilih Alternatif</option>
 
                   @foreach ($alternatives as $alternative)
                   @if (old('alternative_id') == $alternative->id)
@@ -45,10 +45,10 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 m-t-15">Criterias</label>
+              <label class="col-md-3 m-t-15">Kriteria</label>
               <div class="col-md-9">
                 <select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="criteria_id">
-                  <option>Select Criteria</option>
+                  <option>Pilih Kriteria</option>
 
                   @foreach ($criterias as $criteria)
                   @if (old('criteria_id') == $criteria->id)
@@ -62,10 +62,10 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="value" class="col-sm-3 text-left control-label col-form-label">Value</label>
+              <label for="value" class="col-sm-3 text-left control-label col-form-label">Nilai</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control @error('value') is-invalid @enderror" id="value" name="value"
-                  placeholder="Value Here" value="{{ old('value') }}">
+                  placeholder="Masukkan Nilai Matriks" value="{{ old('value') }}">
                 @error('value')
                 <div class="invalid-feedback">
                   {{ $message }}
@@ -76,8 +76,8 @@
           </div>
           <div class="border-top">
             <div class="card-body">
-              <a href="/matrices" class="btn btn-danger">Back</a>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="/matrices" class="btn btn-danger"><i class="mdi mdi-arrow-left-bold"></i> Kembali</a>
+              <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save-all"></i> Simpan</button>
             </div>
           </div>
         </form>

@@ -26,6 +26,7 @@
           <a href="/matrices/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Tambah Data</a>
 
           @if (!$data->isEmpty())
+          {{-- <a href="#" class="btn btn-success"><i class="mdi mdi-calculator"></i> Hitung</a> --}}
           <a href="/count" class="btn btn-success"><i class="mdi mdi-calculator"></i> Hitung</a>
           <a href="javascript:void(0)" class="btn btn-danger btn-truncate"><i class="mdi mdi-delete"></i>
             Hapus Semua Data</a>

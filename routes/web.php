@@ -20,7 +20,7 @@ use App\Http\Controllers\AlternativeController;
 |
 */
 
-// Route::get('/test', [TestController::class, 'index']);
+Route::get('/test', [TestController::class, 'index']);
 
 Route::get('/', function () {
   return view('contents.home', [

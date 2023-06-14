@@ -40,6 +40,12 @@ class MatrixController extends Controller
             ];
         }
 
+        ksort($matrix);
+
+        foreach ($matrix as $key => $value) {
+            ksort($matrix[$key]);
+        }
+
         return view('contents.matrices.index', [
             'alternativeAmount' => $alternativeAmount,
             'criteriaAmount' => $criteriaAmount,
@@ -174,6 +180,12 @@ class MatrixController extends Controller
             $matrix = [];
             foreach ($data as $value) {
                 $matrix[$value->alternative_id][$value->criteria_id] = $value->value;
+            }
+
+            ksort($matrix);
+
+            foreach ($matrix as $key => $value) {
+                ksort($matrix[$key]);
             }
 
             $jumlahAlternatif = count($matrix);

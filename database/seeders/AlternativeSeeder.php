@@ -149,49 +149,49 @@ class AlternativeSeeder extends Seeder
             ],
             [
                 'code' => 'A23',
-                'name' => 'MA Al Falah Putra',
+                'name' => ' MA Al Falah Putra',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A24',
-                'name' => 'MA Al Falah Putri',
+                'name' => ' MA Al Falah Putri',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A25',
-                'name' => 'MA Nurul Hikmah',
+                'name' => ' MA Nurul Hikmah',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A26',
-                'name' => 'MA Mif. Khairiyah',
+                'name' => ' MA Mif. Khairiyah',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A27',
-                'name' => 'MA Darul Ilmi',
+                'name' => ' MA Darul Ilmi',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A28',
-                'name' => 'MA Misbahul Munir',
+                'name' => ' MA Misbahul Munir',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A29',
-                'name' => 'MA Plus Zamzam Djailani',
+                'name' => ' MA Plus Zamzam Djailani',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'code' => 'A30',
-                'name' => 'MAN 1',
+                'name' => ' MAN 1',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

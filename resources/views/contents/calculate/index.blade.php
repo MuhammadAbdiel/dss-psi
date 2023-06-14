@@ -452,6 +452,102 @@
         </div>
 
         <div class="card-body">
+          <h5 class="card-title mb-3">Perankingan</h5>
+          <div class="table-responsive mt-3">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title mb-3">Perankingan SMA</h5>
+          <div class="table-responsive mt-3">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </thead>
+              <tbody id="table-body-sma">
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title mb-3">Perankingan SMK</h5>
+          <div class="table-responsive mt-3">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </thead>
+              <tbody id="table-body-smk">
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title mb-3">Perankingan MA</h5>
+          <div class="table-responsive mt-3">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </thead>
+              <tbody id="table-body-ma">
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Alternatif</td>
+                  <td>Nama Alternatif</td>
+                  <td>θ</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-body">
           <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">Kesimpulan :</h4>
             <p>Sekolah yang terpilih menjadi sekolah terbaik berdasarkan beberapa kriteria tertentu adalah
@@ -462,6 +558,21 @@
             <p class="m-0" id="first"></p>
             <p class="m-0" id="second"></p>
             <p class="m-0" id="third"></p>
+            <hr>
+            <p class="mb-3"><b>Urutan Ranking 1 - 3 SMA :</b></p>
+            <p class="m-0" id="first-sma"></p>
+            <p class="m-0" id="second-sma"></p>
+            <p class="m-0" id="third-sma"></p>
+            <hr>
+            <p class="mb-3"><b>Urutan Ranking 1 - 3 SMK :</b></p>
+            <p class="m-0" id="first-smk"></p>
+            <p class="m-0" id="second-smk"></p>
+            <p class="m-0" id="third-smk"></p>
+            <hr>
+            <p class="mb-3"><b>Urutan Ranking 1 - 3 MA :</b></p>
+            <p class="m-0" id="first-ma"></p>
+            <p class="m-0" id="second-ma"></p>
+            <p class="m-0" id="third-ma"></p>
           </div>
         </div>
 
@@ -518,6 +629,15 @@
   const first = document.querySelector('#first')
   const second = document.querySelector('#second')
   const third = document.querySelector('#third')
+  const firstSma = document.querySelector('#first-sma')
+  const secondSma = document.querySelector('#second-sma')
+  const thirdSma = document.querySelector('#third-sma')
+  const firstSmk = document.querySelector('#first-smk')
+  const secondSmk = document.querySelector('#second-smk')
+  const thirdSmk = document.querySelector('#third-smk')
+  const firstMa = document.querySelector('#first-ma')
+  const secondMa = document.querySelector('#second-ma')
+  const thirdMa = document.querySelector('#third-ma')
 
   let listAlternative = []
   rank.forEach(e => {
@@ -546,10 +666,67 @@
       });
     });
 
+    let listAlternativeSma = listAlternative.filter(e => e.name.includes('SMA'))
+    let listAlternativeSmk = listAlternative.filter(e => e.name.includes('SMK'))
+    let listAlternativeMa = listAlternative.filter(e => e.name.includes(' MA'))
+
+    const tableBody = document.querySelector('#table-body')
+    listAlternative.forEach(e => {
+      tableBody.innerHTML += `
+        <tr>
+          <td>A${e.key}</td>
+          <td>${e.name}</td>
+          <td>${e.value}</td>
+        </tr>
+      `
+    });
+
+    const tableBodySma = document.querySelector('#table-body-sma')
+    listAlternativeSma.forEach(e => {
+      tableBodySma.innerHTML += `
+        <tr>
+          <td>A${e.key}</td>
+          <td>${e.name}</td>
+          <td>${e.value}</td>
+        </tr>
+      `
+    });
+
+    const tableBodySmk = document.querySelector('#table-body-smk')
+    listAlternativeSmk.forEach(e => {
+      tableBodySmk.innerHTML += `
+        <tr>
+          <td>A${e.key}</td>
+          <td>${e.name}</td>
+          <td>${e.value}</td>
+        </tr>
+      `
+    });
+
+    const tableBodyMa = document.querySelector('#table-body-ma')
+    listAlternativeMa.forEach(e => {
+      tableBodyMa.innerHTML += `
+        <tr>
+          <td>A${e.key}</td>
+          <td>${e.name}</td>
+          <td>${e.value}</td>
+        </tr>
+      `
+    });
+
     firstRank.innerHTML = listAlternative[0].name
     first.innerHTML = `1. ${listAlternative[0].name} (${listAlternative[0].value})`
     second.innerHTML = `2. ${listAlternative[1].name} (${listAlternative[1].value})`
     third.innerHTML = `3. ${listAlternative[2].name} (${listAlternative[2].value})`
+    firstSma.innerHTML = `1. ${listAlternativeSma[0].name} (${listAlternativeSma[0].value})`
+    secondSma.innerHTML = `2. ${listAlternativeSma[1].name} (${listAlternativeSma[1].value})`
+    thirdSma.innerHTML = `3. ${listAlternativeSma[2].name} (${listAlternativeSma[2].value})`
+    firstSmk.innerHTML = `1. ${listAlternativeSmk[0].name} (${listAlternativeSmk[0].value})`
+    secondSmk.innerHTML = `2. ${listAlternativeSmk[1].name} (${listAlternativeSmk[1].value})`
+    thirdSmk.innerHTML = `3. ${listAlternativeSmk[2].name} (${listAlternativeSmk[2].value})`
+    firstMa.innerHTML = `1. ${listAlternativeMa[0].name} (${listAlternativeMa[0].value})`
+    secondMa.innerHTML = `2. ${listAlternativeMa[1].name} (${listAlternativeMa[1].value})`
+    thirdMa.innerHTML = `3. ${listAlternativeMa[2].name} (${listAlternativeMa[2].value})`
   });
 </script>
 @endsection

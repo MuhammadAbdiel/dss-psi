@@ -667,7 +667,7 @@
     });
 
     let listAlternativeSma = listAlternative.filter(e => e.name.includes('SMA'))
-    let listAlternativeSmk = listAlternative.filter(e => e.name.includes('SMK'))
+    let listAlternativeSmk = listAlternative.filter(e => e.name.includes('SMK') || e.name.includes('SMTK'))
     let listAlternativeMa = listAlternative.filter(e => e.name.includes(' MA'))
 
     const tableBody = document.querySelector('#table-body')

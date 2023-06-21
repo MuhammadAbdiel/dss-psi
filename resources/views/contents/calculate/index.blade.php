@@ -551,7 +551,9 @@
           <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">Kesimpulan :</h4>
             <p>Sekolah yang terpilih menjadi sekolah terbaik berdasarkan beberapa kriteria tertentu adalah
-              <b id="firstRank"></b>
+              <b id="firstRankSma"></b> untuk SMA, <b id="firstRankSmk"></b> untuk SMK, dan <b id="firstRankMa"></b>
+              untuk MA.
+            </p>
             </p>
             <hr>
             <p class="mb-3"><b>Urutan Ranking 1 - 3 :</b></p>
@@ -625,7 +627,9 @@
   });
 
   const rank = document.querySelectorAll('#rank')
-  const firstRank = document.querySelector('#firstRank')
+  const firstRankSma = document.querySelector('#firstRankSma')
+  const firstRankSmk = document.querySelector('#firstRankSmk')
+  const firstRankMa = document.querySelector('#firstRankMa')
   const first = document.querySelector('#first')
   const second = document.querySelector('#second')
   const third = document.querySelector('#third')
@@ -714,7 +718,9 @@
       `
     });
 
-    firstRank.innerHTML = listAlternative[0].name
+    firstRankSma.innerHTML = listAlternativeSma[0].name
+    firstRankSmk.innerHTML = listAlternativeSmk[0].name
+    firstRankMa.innerHTML = listAlternativeMa[0].name
     first.innerHTML = `1. ${listAlternative[0].name} (${listAlternative[0].value})`
     second.innerHTML = `2. ${listAlternative[1].name} (${listAlternative[1].value})`
     third.innerHTML = `3. ${listAlternative[2].name} (${listAlternative[2].value})`

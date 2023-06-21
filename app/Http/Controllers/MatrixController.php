@@ -64,8 +64,8 @@ class MatrixController extends Controller
     public function create()
     {
         return view('contents.matrices.create', [
-            'criterias' => Criteria::latest()->get(),
-            'alternatives' => Alternative::latest()->get(),
+            'criterias' => Criteria::all(),
+            'alternatives' => Alternative::all(),
         ]);
     }
 
@@ -114,8 +114,8 @@ class MatrixController extends Controller
     {
         return view('contents.matrices.edit', [
             'matrix' => $matrix,
-            'criterias' => Criteria::latest()->get(),
-            'alternatives' => Alternative::latest()->get(),
+            'criterias' => Criteria::all(),
+            'alternatives' => Alternative::all(),
         ]);
     }
 

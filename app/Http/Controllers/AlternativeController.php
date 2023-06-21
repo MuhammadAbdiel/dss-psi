@@ -18,7 +18,7 @@ class AlternativeController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Alternative::latest()->get();
+        $data = Alternative::all();
         if ($request->ajax()) {
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {

@@ -18,7 +18,7 @@ class CriteriaController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Criteria::latest()->get();
+        $data = Criteria::all();
         if ($request->ajax()) {
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
